@@ -1,0 +1,27 @@
+<span
+  *ngIf="isError; else showData"
+  [matTooltip]="errorMessage"
+  matTooltipClass="user-tooltip"
+  class="user-error"
+  [matMenuTriggerFor]="menu"
+  (menuOpened)="onMenuOpen()"
+  >{{ data }}</span
+>
+<ng-template #showData>
+  <p>{{ data }}</p>
+</ng-template>
+
+<mat-menu #menu="matMenu">
+  <div class="loader" *ngIf="suggestions.length === 0; else showMenu">
+    <mat-spinner diameter="30"></mat-spinner>
+  </div>
+  <ng-template #showMenu>
+    <button
+      mat-menu-item
+      *ngFor="let suggestion of suggestions"
+      (click)="onMenuSelect(suggestion)"
+    >
+      {{ suggestion }}
+    </button>
+  </ng-template>
+</mat-menu>

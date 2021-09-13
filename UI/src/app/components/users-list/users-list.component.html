@@ -1,0 +1,84 @@
+<div class="header">
+  <h2>Dashboard</h2>
+  <button (click)="exportToCsv()" class="header__export">Export to Csv</button>
+</div>
+<div class="user-card">
+  <mat-card *ngFor="let user of usersList" class="user-card__container">
+    <div class="user-card__image">
+      <img [src]="user.picture" alt="user photo" />
+    </div>
+    <mat-card-content class="user-card__content">
+      <div class="user-card__name">
+        {{ user.title }}. {{ user.firstName }} {{ user.lastName }}
+      </div>
+      <div class="loader" *ngIf="user.isLoading">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
+      <div
+        class="user-card__personal"
+        *ngIf="user.isExpanded && !user.isLoading"
+      >
+        <div>
+          <p class="user-card__key">Gender:</p>
+          <p>{{ user.gender }}</p>
+          <p class="user-card__key">Date of Birth:</p>
+          <p>{{ user.dateOfBirth | date }}</p>
+          <p class="user-card__key">Register Date:</p>
+          <p>{{ user.registerDate | date }}</p>
+          <p class="user-card__key">Email:</p>
+          <p>{{ user.email }}</p>
+          <p class="user-card__key">Phone:</p>
+          <p>{{ user.phone }}</p>
+        </div>
+        <div>
+          <p class="user-card__key">Street:</p>
+          <p>{{ user.location?.street }}</p>
+          <p class="user-card__key">City:</p>
+          <ng-template #showCity>
+            <p>{{ user.location?.city }}</p>
+          </ng-template>
+          <app-suggestions
+            [isError]="user.errors?.city"
+            [errorMessage]="errorMessages.city"
+            [data]="user.location?.city"
+            [userData]="user"
+            [type]="type.city"
+            (updateUserData)="findIndexAndUpdateData($event)"
+          ></app-suggestions>
+          <p class="user-card__key">State:</p>
+          <ng-template #showState>
+            <p>{{ user.location?.state }}</p>
+          </ng-template>
+          <app-suggestions
+            [isError]="user.errors?.state"
+            [errorMessage]="errorMessages.state"
+            [data]="user.location?.state"
+            [userData]="user"
+            [type]="type.state"
+            (updateUserData)="findIndexAndUpdateData($event)"
+          ></app-suggestions>
+          <p class="user-card__key">Country:</p>
+          <p>{{ user.location?.country }}</p>
+          <p class="user-card__key">Timezone:</p>
+          <app-suggestions
+            [isError]="user.errors?.timezone"
+            [errorMessage]="errorMessages.timezone"
+            [data]="user.location?.timezone"
+            [userData]="user"
+            [type]="type.timezone"
+            (updateUserData)="findIndexAndUpdateData($event)"
+          ></app-suggestions>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!user.isLoading" class="user-card__actions">
+      <button
+        mat-button
+        class="user-card__button"
+        (click)="toggleContentView(user.id)"
+      >
+        {{ user.isExpanded ? "Hide Details" : "Show Details" }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

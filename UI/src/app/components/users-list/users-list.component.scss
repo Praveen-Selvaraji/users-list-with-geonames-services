@@ -1,0 +1,112 @@
+@import "../../../variables.scss";
+
+.user-card {
+  display: grid;
+  grid-gap: 100px 20px;
+  grid-template-columns: auto auto auto;
+  padding: 100px 35px;
+
+  &__container {
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background: $white;
+    border-radius: 12px;
+    max-width: 700px;
+    min-width: 400px;
+    height: max-content;
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0px 5px 50px 0px rgb(108, 68, 252),
+      0px 0px 0px 7px rgba(107, 74, 255, 0.5);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    margin-top: -35px;
+    text-align: center;
+    padding: 0 10px 10px 10px;
+    transition: all 0.3s;
+  }
+
+  &__personal {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      text-align: left;
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  &__key {
+    font-weight: bold;
+    padding-top: 10px;
+  }
+
+  &__name {
+    font-weight: 700;
+    font-size: 20px;
+    text-transform: capitalize;
+    background: $primary-color;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+  }
+
+  &__button {
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: $white;
+    cursor: pointer;
+    background: $primary-color;
+    box-shadow: 0px 4px 30px rgba(223, 45, 70, 0.35);
+    margin-bottom: 10px;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0px 5px 10px $white;
+
+  h2 {
+    text-transform: uppercase;
+    color: $white;
+  }
+
+  &__export {
+    border: none;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: $black;
+    cursor: pointer;
+  }
+}
